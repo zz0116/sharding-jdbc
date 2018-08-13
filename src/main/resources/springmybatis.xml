@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:rdb="http://www.dangdang.com/schema/ddframe/rdb"
+       xmlns:sharding="http://shardingjdbc.io/schema/shardingjdbc/sharding"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.dangdang.com/schema/ddframe/rdb
-       http://www.dangdang.com/schema/ddframe/rdb/rdb.xsd">
+       http://shardingjdbc.io/schema/shardingjdbc/sharding
+       http://shardingjdbc.io/schema/shardingjdbc/sharding/sharding.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
 
@@ -30,14 +30,13 @@
     </bean>
 
     <!-- sharding-jdbc -->
-    <rdb:strategy id="articleTableShardingAlgorithm" sharding-columns="uid"
-                  algorithm-class="com.zyz.demo.ssm.sharding.ArticleTableShardingAlgorithm"/>
-    <rdb:data-source id="shardingDataSource">
-        <rdb:sharding-rule data-sources="dataSource">
-            <rdb:table-rules>
-                <rdb:table-rule logic-table="article" actual-tables="article_${0..5}"
-                                table-strategy="articleTableShardingAlgorithm"/>
-            </rdb:table-rules>
-        </rdb:sharding-rule>
-    </rdb:data-source>
+    <sharding:inline-strategy id="articleTableStrategy" sharding-column="uid"
+                              algorithm-expression="article_${uid}"/>
+    <sharding:data-source id="shardingDataSource">
+        <sharding:sharding-rule data-source-names="dataSource">
+            <sharding:table-rules>
+                <sharding:table-rule logic-table="article" table-strategy-ref="articleTableStrategy"/>
+            </sharding:table-rules>
+        </sharding:sharding-rule>
+    </sharding:data-source>
 </beans>
