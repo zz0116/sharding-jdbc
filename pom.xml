@@ -15,20 +15,21 @@
         <spring.version>4.3.18.RELEASE</spring.version>
         <slf4j.version>1.7.25</slf4j.version>
         <mybatis.version>3.4.6</mybatis.version>
-        <shardingjdbc.version>2.0.3</shardingjdbc.version>
+        <sharding-sphere.version>3.0.0.M2</sharding-sphere.version>
+        <logback.version>1.1.6</logback.version>
     </properties>
 
     <dependencies>
         <!-- Sharding -->
         <dependency>
-            <groupId>io.shardingjdbc</groupId>
-            <artifactId>sharding-jdbc-core</artifactId>
-            <version>${shardingjdbc.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.shardingjdbc</groupId>
-            <artifactId>sharding-jdbc-core-spring-namespace</artifactId>
-            <version>${shardingjdbc.version}</version>
+            <groupId>io.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-namespace</artifactId>
+            <version>${sharding-sphere.version}</version>
         </dependency>
 
         <dependency>
@@ -118,7 +119,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>8089</port>
+                    <port>8080</port>
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>
             </plugin>

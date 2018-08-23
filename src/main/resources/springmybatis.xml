@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:sharding="http://shardingjdbc.io/schema/shardingjdbc/sharding"
+       xmlns:sharding="http://shardingsphere.io/schema/shardingsphere/sharding"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
-       http://shardingjdbc.io/schema/shardingjdbc/sharding
-       http://shardingjdbc.io/schema/shardingjdbc/sharding/sharding.xsd">
+       http://shardingsphere.io/schema/shardingsphere/sharding
+       http://shardingsphere.io/schema/shardingsphere/sharding/sharding.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
 
@@ -29,7 +29,7 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-    <!-- sharding-jdbc -->
+    <!-- sharding-sphere -->
     <sharding:inline-strategy id="articleTableStrategy" sharding-column="uid"
                               algorithm-expression="article_${uid}"/>
     <sharding:data-source id="shardingDataSource">
